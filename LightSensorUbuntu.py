@@ -1,5 +1,6 @@
 import time
 import subprocess
+import logging
 from yocto_api import *
 from yocto_lightsensor import *
 
