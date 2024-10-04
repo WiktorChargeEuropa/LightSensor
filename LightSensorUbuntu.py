@@ -54,8 +54,8 @@ def set_brightness(value):
         for line in output:
             # Split the output line to get the display name
             display_name = line.split()[0]
-            # Set the brightness using xrandr
-            command = f"xrandr --output {display_name} --brightness {value / 100.0}"
+            # Set the brightness using xrandr with DISPLAY=:0
+            command = f"DISPLAY=:0 xrandr --output {display_name} --brightness {value / 100.0}"
             subprocess.call(command, shell=True)
             if debugMode:
                 print(f"Set screen brightness to {value}% on {display_name}")
