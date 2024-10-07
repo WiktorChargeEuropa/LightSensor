@@ -6,7 +6,6 @@ from yocto_lightsensor import *
 
 loopInterval = 0.33  # Time between measuring in seconds
 debugMode = True  # Enables debug messages
-minBrightness = 40
 
 def get_light_value():
     try:
@@ -47,14 +46,20 @@ def api_init():
             print(f"Cannot initialize Yoctopuce API: {errmsg.value}")
 
 def calculate_screen_brightness(lightValue):
-    return min(100, lightValue / 5 + minBrightness)
+    return min(100, lightValue / 5 + 25)
 
 def set_brightness(value):
-    value = int(value)
     try:
-            command = f"sudo ddcutil -d 1 setvcp 10 {value}"
+        # Get the connected displays
+        output = subprocess.check_output("DISPLAY=:0 xrandr --query | grep ' connected'", shell=True).decode().strip().split('\n')
+        for line in output:
+            # Split the output line to get the display name
+            display_name = line.split()[0]
+            # Set the brightness using xrandr with DISPLAY=:0
+            command = f"DISPLAY=:0 xrandr --output {display_name} --brightness {value / 100.0}"
             subprocess.call(command, shell=True)
-            print(f"Brightness set to {value}")
+            if debugMode:
+                print(f"Set screen brightness to {value}% on {display_name}")
     except Exception as e:
         if debugMode:
             print(f"Error setting brightness using xrandr: {e}")
