@@ -51,6 +51,7 @@ def calculate_screen_brightness(lightValue):
 
 def set_brightness(value):
     value = int(value)
+    print(value)
     try:
         # Get the connected displays
         # output = subprocess.check_output("DISPLAY=:0 xrandr --query | grep ' connected'", shell=True).decode().strip().split('\n')
