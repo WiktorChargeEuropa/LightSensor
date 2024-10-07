@@ -54,8 +54,6 @@ def set_brightness(value):
     try:
             command = f"sudo ddcutil -d 1 setvcp 10 {value}"
             subprocess.call(command, shell=True)
-            if debugMode:
-                print(f"Set screen brightness to {value}% on {display_name}") 
     except Exception as e:
         if debugMode:
             print(f"Error setting brightness using xrandr: {e}")
