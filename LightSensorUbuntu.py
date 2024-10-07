@@ -6,6 +6,7 @@ from yocto_lightsensor import *
 
 loopInterval = 0.33  # Time between measuring in seconds
 debugMode = True  # Enables debug messages
+minBrightness = 40
 
 def get_light_value():
     try:
@@ -46,7 +47,7 @@ def api_init():
             print(f"Cannot initialize Yoctopuce API: {errmsg.value}")
 
 def calculate_screen_brightness(lightValue):
-    return min(100, lightValue / 5 + 25)
+    return min(100, lightValue / 5 + minBrightness)
 
 def set_brightness(value):
     try:
