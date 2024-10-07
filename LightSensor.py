@@ -51,18 +51,11 @@ def calculate_screen_brightness(lightValue):
 
 def set_brightness(value):
     value = int(value)
-    print(value)
     try:
-        # Get the connected displays
-        # output = subprocess.check_output("DISPLAY=:0 xrandr --query | grep ' connected'", shell=True).decode().strip().split('\n')
-        for line in output:
-            # Split the output line to get the display name
-            display_name = line.split()[0]
-            # Set the brightness using xrandr with DISPLAY=:0
             command = f"sudo ddcutil -d 1 setvcp 10 {value}"
             subprocess.call(command, shell=True)
             if debugMode:
-                print(f"Set screen brightness to {value}% on {display_name}")
+                print(f"Set screen brightness to {value}% on {display_name}") 
     except Exception as e:
         if debugMode:
             print(f"Error setting brightness using xrandr: {e}")
