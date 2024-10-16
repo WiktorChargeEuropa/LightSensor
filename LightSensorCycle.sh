@@ -2,5 +2,5 @@
 while true
 do
     python3 /home/nucadmin/LightSensor/LightSensor/LightSensorSingleUse.py
-    sleep 5
+    sleep 1
 done
