@@ -1,6 +1,6 @@
 #!/bin/bash
 while true
 do
-    python3 /ścieżka/do/skryptu.py
+    python3 /home/nucadmin/LightSensor/LightSensor/LightSensorSingleUse.py
     sleep 5
 done
